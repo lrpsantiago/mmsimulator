@@ -18,3 +18,13 @@ C:\Users\gizmin\Documents\Visual Studio 2017\Projects\MoneyManagementSimulator\M
 C:\Users\gizmin\Documents\Visual Studio 2017\Projects\MoneyManagementSimulator\MoneyManagementSimulator\obj\Debug\MoneyManagementSimulator.csproj.CoreCompileInputs.cache
 C:\Users\gizmin\Documents\Visual Studio 2017\Projects\MoneyManagementSimulator\MoneyManagementSimulator\obj\Debug\MoneyManagementSimulator.exe
 C:\Users\gizmin\Documents\Visual Studio 2017\Projects\MoneyManagementSimulator\MoneyManagementSimulator\obj\Debug\MoneyManagementSimulator.pdb
+C:\Users\Luiz Ricardo\Documents\mmsimulator\MoneyManagementSimulator\bin\Debug\MoneyManagementSimulator.exe.config
+C:\Users\Luiz Ricardo\Documents\mmsimulator\MoneyManagementSimulator\bin\Debug\MoneyManagementSimulator.exe
+C:\Users\Luiz Ricardo\Documents\mmsimulator\MoneyManagementSimulator\bin\Debug\MoneyManagementSimulator.pdb
+C:\Users\Luiz Ricardo\Documents\mmsimulator\MoneyManagementSimulator\obj\Debug\MoneyManagementSimulator.csprojAssemblyReference.cache
+C:\Users\Luiz Ricardo\Documents\mmsimulator\MoneyManagementSimulator\obj\Debug\MoneyManagementSimulator.MainForm.resources
+C:\Users\Luiz Ricardo\Documents\mmsimulator\MoneyManagementSimulator\obj\Debug\MoneyManagementSimulator.Properties.Resources.resources
+C:\Users\Luiz Ricardo\Documents\mmsimulator\MoneyManagementSimulator\obj\Debug\MoneyManagementSimulator.csproj.GenerateResource.cache
+C:\Users\Luiz Ricardo\Documents\mmsimulator\MoneyManagementSimulator\obj\Debug\MoneyManagementSimulator.csproj.CoreCompileInputs.cache
+C:\Users\Luiz Ricardo\Documents\mmsimulator\MoneyManagementSimulator\obj\Debug\MoneyManagementSimulator.exe
+C:\Users\Luiz Ricardo\Documents\mmsimulator\MoneyManagementSimulator\obj\Debug\MoneyManagementSimulator.pdb

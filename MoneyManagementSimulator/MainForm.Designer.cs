@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
@@ -55,7 +54,16 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.gridResults = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.mainChart)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTrades)).BeginInit();
@@ -64,10 +72,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudAccuracy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBalance)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridResults)).BeginInit();
             this.SuspendLayout();
             // 
-            // chart1
+            // mainChart
             // 
             this.mainChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -83,25 +93,19 @@
             chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             chartArea1.Name = "ChartArea1";
             this.mainChart.ChartAreas.Add(chartArea1);
-            legend1.BackColor = System.Drawing.Color.Transparent;
-            legend1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            legend1.Name = "Legend1";
-            this.mainChart.Legends.Add(legend1);
-            this.mainChart.Location = new System.Drawing.Point(323, 12);
-            this.mainChart.Name = "chart1";
+            this.mainChart.Location = new System.Drawing.Point(323, 52);
+            this.mainChart.Name = "mainChart";
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series1.Color = System.Drawing.Color.Lime;
-            series1.Legend = "Legend1";
-            series1.Name = "Balance";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Color = System.Drawing.Color.DarkOrchid;
+            series1.Name = "Target";
             series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series2.Color = System.Drawing.Color.DarkOrchid;
-            series2.Legend = "Legend1";
-            series2.Name = "Target";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Color = System.Drawing.Color.Lime;
+            series2.Name = "Balance";
             this.mainChart.Series.Add(series1);
             this.mainChart.Series.Add(series2);
-            this.mainChart.Size = new System.Drawing.Size(465, 426);
+            this.mainChart.Size = new System.Drawing.Size(673, 652);
             this.mainChart.TabIndex = 0;
             this.mainChart.Text = "chart1";
             // 
@@ -120,9 +124,9 @@
             this.groupBox1.Controls.Add(this.nudAccuracy);
             this.groupBox1.Controls.Add(this.nudBalance);
             this.groupBox1.Controls.Add(this.btnRun);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 52);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(305, 259);
+            this.groupBox1.Size = new System.Drawing.Size(305, 258);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Setup";
@@ -296,7 +300,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRun.Location = new System.Drawing.Point(6, 215);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(293, 38);
+            this.btnRun.Size = new System.Drawing.Size(293, 37);
             this.btnRun.TabIndex = 8;
             this.btnRun.Text = "Run";
             this.btnRun.UseVisualStyleBackColor = true;
@@ -306,16 +310,16 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox2.Controls.Add(this.gridResults);
             this.groupBox2.Controls.Add(this.tbExpectedBalance);
             this.groupBox2.Controls.Add(this.tbProfitLoss);
             this.groupBox2.Controls.Add(this.tbFinalBalance);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(12, 277);
+            this.groupBox2.Location = new System.Drawing.Point(12, 316);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(305, 161);
+            this.groupBox2.Size = new System.Drawing.Size(305, 388);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Results";
@@ -371,27 +375,107 @@
             this.label5.TabIndex = 1;
             this.label5.Text = "Final Balance";
             // 
-            // dataGridView1
+            // menuStrip1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1008, 24);
+            this.menuStrip1.TabIndex = 3;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripProgressBar1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 707);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1008, 22);
+            this.statusStrip1.TabIndex = 4;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1008, 25);
+            this.toolStrip1.TabIndex = 5;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // gridResults
+            // 
+            this.gridResults.AllowUserToAddRows = false;
+            this.gridResults.AllowUserToDeleteRows = false;
+            this.gridResults.AllowUserToResizeColumns = false;
+            this.gridResults.AllowUserToResizeRows = false;
+            this.gridResults.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 97);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(293, 58);
-            this.dataGridView1.TabIndex = 0;
+            this.gridResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridResults.Location = new System.Drawing.Point(6, 97);
+            this.gridResults.MultiSelect = false;
+            this.gridResults.Name = "gridResults";
+            this.gridResults.ReadOnly = true;
+            this.gridResults.RowHeadersVisible = false;
+            this.gridResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridResults.Size = new System.Drawing.Size(293, 285);
+            this.gridResults.TabIndex = 7;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.mainChart);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.MainMenuStrip = this.menuStrip1;
+            this.Name = "MainForm";
             this.Text = "Money Management Simulator";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.mainChart)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -402,8 +486,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudBalance)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridResults)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -423,7 +512,6 @@
         private System.Windows.Forms.NumericUpDown nudRisk;
         private System.Windows.Forms.NumericUpDown nudAccuracy;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnOptConservative;
         private System.Windows.Forms.Button btnOptAggressive;
         private System.Windows.Forms.Label label7;
@@ -432,6 +520,16 @@
         private System.Windows.Forms.TextBox tbExpectedBalance;
         private System.Windows.Forms.TextBox tbProfitLoss;
         private System.Windows.Forms.TextBox tbFinalBalance;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.DataGridView gridResults;
     }
 }
 
