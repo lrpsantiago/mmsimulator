@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MoneyManagementSimulator
 {
@@ -18,9 +19,12 @@ namespace MoneyManagementSimulator
             }
         }
 
+        public List<double> BalanceHistory { get; set; }
+
         public StrategyResult(double balance = 1000)
         {
             Balance = balance;
+            BalanceHistory = new List<double> { Balance };
         }
 
         public int CompareTo(object obj)

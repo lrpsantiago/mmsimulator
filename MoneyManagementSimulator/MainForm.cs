@@ -9,8 +9,7 @@ namespace MoneyManagementSimulator
 {
     public partial class MainForm : Form
     {
-        private Random _random = new Random();
-        private List<StrategyResult> _results = new List<StrategyResult>();
+        private readonly Random _random = new Random();
         private HorizontalLineAnnotation _initialBalanceLine;
 
         public MainForm()
@@ -21,62 +20,7 @@ namespace MoneyManagementSimulator
 
         private void BtnRun_Click(object sender, EventArgs e)
         {
-            var balance = Convert.ToDouble(nudBalance.Value);
-            var accuracy = Convert.ToDouble(nudAccuracy.Value / 100);
-            var risk = Convert.ToDouble(nudRisk.Value / 100);
-            var tpMultiplier = Convert.ToDouble(nudTpMultiplier.Value);
-            var trades = Convert.ToInt32(nudTrades.Value);
-            var tries = 1000;
-            var results = new List<StrategyResult>();
-
-            mainChart.Series.Clear();
-            _initialBalanceLine.Y = balance;
-
-            for (int t = 0; t < tries; t++)
-            {
-                var serie = CreateSeries(Color.DimGray, 1);
-                var result = new StrategyResult(balance);
-
-                serie.Points.Add(balance);
-
-                for (int i = 0; i < trades; i++)
-                {
-                    if (result.Balance < 0)
-                    {
-                        break;
-                    }
-
-                    var rand = _random.NextDouble();
-
-                    if (rand < accuracy)
-                    {
-                        result.Balance += (result.Balance * risk) * tpMultiplier;
-                        result.Win++;
-                    }
-                    else
-                    {
-                        result.Balance -= (result.Balance * risk);
-                        result.Loss++;
-                    }
-
-                    serie.Points.Add(result.Balance);
-                }
-
-                results.Add(result);
-                mainChart.Series.Add(serie);
-            }
-
-            tbFinalBalance.Text = results.Average(r => r.Balance).ToString("C2");
-            //tbProfitLoss.Text = (result.Balance - balance).ToString("C2");
-
-            gridResults.DataSource = results
-                .Distinct()
-                .OrderByDescending(r => r.Balance)
-                .ToList();
-
-            PlotTarget(balance, accuracy, tpMultiplier, risk, trades);
-
-            mainChart.ChartAreas[0].RecalculateAxesScale();
+            RunSimulations();
         }
 
         private void BtnOptConservative_Click(object sender, EventArgs e)
@@ -87,11 +31,16 @@ namespace MoneyManagementSimulator
 
             try
             {
+                if (risk < 0)
+                {
+                    throw new Exception("Not possible to optimize the risk with the given parameters.");
+                }
+
                 nudRisk.Value = Convert.ToDecimal(risk * 100);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogUtil.ShowError(ex.Message);
             }
         }
 
@@ -103,11 +52,16 @@ namespace MoneyManagementSimulator
 
             try
             {
+                if (risk < 0)
+                {
+                    throw new Exception("Not possible to optimize the risk with the given parameters.");
+                }
+
                 nudRisk.Value = Convert.ToDecimal(risk * 100);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogUtil.ShowError(ex.Message);
             }
         }
 
@@ -144,7 +98,7 @@ namespace MoneyManagementSimulator
 
         private void PlotTarget(double balance, double accuracy, double tpMultiplier, double risk, int trades)
         {
-            var series = CreateSeries(Color.Lime, 2);
+            var series = mainChart.Series[0]; //CreateSeries(Color.Lime, 2);
             series.Points.Add(balance);
 
             for (int i = 0; i < trades; i++)
@@ -154,10 +108,11 @@ namespace MoneyManagementSimulator
                 series.Points.Add(targetValue);
             }
 
-            mainChart.Series.Add(series);
+            //mainChart.Series.Add(series);
 
             var finalBalance = CalculateTarget(balance, accuracy, tpMultiplier, risk, trades);
             tbExpectedBalance.Text = finalBalance.ToString("C2");
+            tbProfitLoss.Text = (finalBalance - balance).ToString("C2");
         }
 
         private Series CreateSeries(Color lineColor, int lineWidth)
@@ -168,6 +123,104 @@ namespace MoneyManagementSimulator
                 Color = lineColor,
                 BorderWidth = lineWidth
             };
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            RunSimulations();
+        }
+
+        private void RunSimulations()
+        {
+            var balance = Convert.ToDouble(nudBalance.Value);
+            var accuracy = Convert.ToDouble(nudAccuracy.Value / 100);
+            var risk = Convert.ToDouble(nudRisk.Value / 100);
+            var tpMultiplier = Convert.ToDouble(nudTpMultiplier.Value);
+            var trades = Convert.ToInt32(nudTrades.Value);
+            var tries = 1000;
+            var results = new List<StrategyResult>();
+
+            simulationProgressBar.Minimum = 0;
+            simulationProgressBar.Maximum = tries;
+
+            for (int t = 0; t < tries; t++)
+            {
+                var result = new StrategyResult(balance);
+
+                for (int i = 0; i < trades; i++)
+                {
+                    if (result.Balance < 0)
+                    {
+                        break;
+                    }
+
+                    var rand = _random.NextDouble();
+
+                    if (rand < accuracy)
+                    {
+                        result.Balance += (result.Balance * risk) * tpMultiplier;
+                        result.Win++;
+                    }
+                    else
+                    {
+                        result.Balance -= (result.Balance * risk);
+                        result.Loss++;
+                    }
+
+                    result.BalanceHistory.Add(result.Balance);
+                }
+
+                results.Add(result);
+
+                simulationProgressBar.Value = t;
+            }
+
+            ClearPoints();
+            _initialBalanceLine.Y = balance;
+
+            gridResults.DataSource = results
+                .Distinct()
+                .OrderByDescending(r => r.Balance)
+                .ToList();
+
+            PlotTarget(balance, accuracy, tpMultiplier, risk, trades);
+
+            mainChart.ChartAreas[0].RecalculateAxesScale();
+        }
+
+        private void ClearPoints()
+        {
+            foreach (var serie in mainChart.Series)
+            {
+                serie.Points.Clear();
+            }
+        }
+
+        private void gridResults_SelectionChanged(object sender, EventArgs e)
+        {
+            if (gridResults.SelectedRows.Count <= 0)
+            {
+                return;
+            }
+
+            var selectedRow = gridResults.SelectedRows[0];
+
+            if (selectedRow == null)
+            {
+                return;
+            }
+
+            var item = selectedRow.DataBoundItem as StrategyResult;
+            var series = mainChart.Series[1];
+            series.Points.Clear();
+
+            foreach (var point in item.BalanceHistory)
+            {
+                series.Points.Add(point);
+            }
+
+            //mainChart.Series.Add(series);
+            mainChart.ChartAreas[0].RecalculateAxesScale();
         }
     }
 }

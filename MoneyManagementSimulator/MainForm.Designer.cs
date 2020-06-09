@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mainChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -48,12 +50,15 @@
             this.nudBalance = new System.Windows.Forms.NumericUpDown();
             this.btnRun = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gridResults = new System.Windows.Forms.DataGridView();
+            this.Balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Wins = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Loses = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WinRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbExpectedBalance = new System.Windows.Forms.TextBox();
             this.tbProfitLoss = new System.Windows.Forms.TextBox();
-            this.tbFinalBalance = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,9 +66,9 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.simulationProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.gridResults = new System.Windows.Forms.DataGridView();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.mainChart)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTrades)).BeginInit();
@@ -72,9 +77,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudAccuracy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBalance)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridResults)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridResults)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainChart
@@ -84,27 +90,27 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mainChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.mainChart.BorderlineColor = System.Drawing.Color.Transparent;
-            chartArea1.AxisX.LabelStyle.ForeColor = System.Drawing.Color.WhiteSmoke;
-            chartArea1.AxisX.LineColor = System.Drawing.Color.WhiteSmoke;
-            chartArea1.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea1.AxisY.LabelStyle.ForeColor = System.Drawing.Color.WhiteSmoke;
-            chartArea1.AxisY.LineColor = System.Drawing.Color.WhiteSmoke;
-            chartArea1.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            chartArea1.Name = "ChartArea1";
-            this.mainChart.ChartAreas.Add(chartArea1);
+            chartArea2.AxisX.LabelStyle.ForeColor = System.Drawing.Color.WhiteSmoke;
+            chartArea2.AxisX.LineColor = System.Drawing.Color.WhiteSmoke;
+            chartArea2.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea2.AxisY.LabelStyle.ForeColor = System.Drawing.Color.WhiteSmoke;
+            chartArea2.AxisY.LineColor = System.Drawing.Color.WhiteSmoke;
+            chartArea2.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            chartArea2.Name = "ChartArea1";
+            this.mainChart.ChartAreas.Add(chartArea2);
             this.mainChart.Location = new System.Drawing.Point(323, 52);
             this.mainChart.Name = "mainChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Color = System.Drawing.Color.DarkOrchid;
-            series1.Name = "Target";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Color = System.Drawing.Color.Lime;
-            series2.Name = "Balance";
-            this.mainChart.Series.Add(series1);
-            this.mainChart.Series.Add(series2);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series3.Color = System.Drawing.Color.Lime;
+            series3.Name = "Expected";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series4.Color = System.Drawing.Color.DarkOrchid;
+            series4.Name = "Selected";
+            this.mainChart.Series.Add(series3);
+            this.mainChart.Series.Add(series4);
             this.mainChart.Size = new System.Drawing.Size(673, 652);
             this.mainChart.TabIndex = 0;
             this.mainChart.Text = "chart1";
@@ -178,9 +184,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 73);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.Size = new System.Drawing.Size(88, 13);
             this.label1.TabIndex = 8;
-            this.label1.Text = "TP Multiplier";
+            this.label1.Text = "Reward Multiplier";
             // 
             // label2
             // 
@@ -212,7 +218,7 @@
             this.nudTrades.Size = new System.Drawing.Size(120, 20);
             this.nudTrades.TabIndex = 5;
             this.nudTrades.Value = new decimal(new int[] {
-            100,
+            20,
             0,
             0,
             0});
@@ -313,10 +319,8 @@
             this.groupBox2.Controls.Add(this.gridResults);
             this.groupBox2.Controls.Add(this.tbExpectedBalance);
             this.groupBox2.Controls.Add(this.tbProfitLoss);
-            this.groupBox2.Controls.Add(this.tbFinalBalance);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Location = new System.Drawing.Point(12, 316);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(305, 388);
@@ -324,9 +328,71 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Results";
             // 
+            // gridResults
+            // 
+            this.gridResults.AllowUserToAddRows = false;
+            this.gridResults.AllowUserToDeleteRows = false;
+            this.gridResults.AllowUserToResizeColumns = false;
+            this.gridResults.AllowUserToResizeRows = false;
+            this.gridResults.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.gridResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Balance,
+            this.Wins,
+            this.Loses,
+            this.WinRate});
+            this.gridResults.Location = new System.Drawing.Point(6, 71);
+            this.gridResults.MultiSelect = false;
+            this.gridResults.Name = "gridResults";
+            this.gridResults.ReadOnly = true;
+            this.gridResults.RowHeadersVisible = false;
+            this.gridResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridResults.Size = new System.Drawing.Size(293, 311);
+            this.gridResults.TabIndex = 7;
+            this.gridResults.SelectionChanged += new System.EventHandler(this.gridResults_SelectionChanged);
+            // 
+            // Balance
+            // 
+            this.Balance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Balance.DataPropertyName = "Balance";
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.Balance.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Balance.HeaderText = "Balance";
+            this.Balance.Name = "Balance";
+            this.Balance.ReadOnly = true;
+            this.Balance.Width = 71;
+            // 
+            // Wins
+            // 
+            this.Wins.DataPropertyName = "Win";
+            this.Wins.HeaderText = "Wins";
+            this.Wins.Name = "Wins";
+            this.Wins.ReadOnly = true;
+            // 
+            // Loses
+            // 
+            this.Loses.DataPropertyName = "Loss";
+            this.Loses.HeaderText = "Loses";
+            this.Loses.Name = "Loses";
+            this.Loses.ReadOnly = true;
+            // 
+            // WinRate
+            // 
+            this.WinRate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.WinRate.DataPropertyName = "WinRate";
+            dataGridViewCellStyle4.Format = "P2";
+            this.WinRate.DefaultCellStyle = dataGridViewCellStyle4;
+            this.WinRate.HeaderText = "Win Rate";
+            this.WinRate.Name = "WinRate";
+            this.WinRate.ReadOnly = true;
+            this.WinRate.Width = 77;
+            // 
             // tbExpectedBalance
             // 
-            this.tbExpectedBalance.Location = new System.Drawing.Point(199, 71);
+            this.tbExpectedBalance.Location = new System.Drawing.Point(199, 19);
             this.tbExpectedBalance.Name = "tbExpectedBalance";
             this.tbExpectedBalance.ReadOnly = true;
             this.tbExpectedBalance.Size = new System.Drawing.Size(100, 20);
@@ -340,40 +406,23 @@
             this.tbProfitLoss.Size = new System.Drawing.Size(100, 20);
             this.tbProfitLoss.TabIndex = 5;
             // 
-            // tbFinalBalance
-            // 
-            this.tbFinalBalance.Location = new System.Drawing.Point(199, 19);
-            this.tbFinalBalance.Name = "tbFinalBalance";
-            this.tbFinalBalance.ReadOnly = true;
-            this.tbFinalBalance.Size = new System.Drawing.Size(100, 20);
-            this.tbFinalBalance.TabIndex = 4;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(6, 48);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(64, 13);
+            this.label7.Size = new System.Drawing.Size(112, 13);
             this.label7.TabIndex = 3;
-            this.label7.Text = "Profit / Loss";
+            this.label7.Text = "Expected Profit / Loss";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 74);
+            this.label6.Location = new System.Drawing.Point(6, 22);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(94, 13);
             this.label6.TabIndex = 2;
             this.label6.Text = "Expected Balance";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 13);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Final Balance";
             // 
             // menuStrip1
             // 
@@ -422,43 +471,40 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripProgressBar1});
+            this.simulationProgressBar});
             this.statusStrip1.Location = new System.Drawing.Point(0, 707);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1008, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripProgressBar1
+            // simulationProgressBar
             // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            this.simulationProgressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.simulationProgressBar.Name = "simulationProgressBar";
+            this.simulationProgressBar.Size = new System.Drawing.Size(100, 16);
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.toolStrip1.Size = new System.Drawing.Size(1008, 25);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // gridResults
+            // toolStripButton1
             // 
-            this.gridResults.AllowUserToAddRows = false;
-            this.gridResults.AllowUserToDeleteRows = false;
-            this.gridResults.AllowUserToResizeColumns = false;
-            this.gridResults.AllowUserToResizeRows = false;
-            this.gridResults.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.gridResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridResults.Location = new System.Drawing.Point(6, 97);
-            this.gridResults.MultiSelect = false;
-            this.gridResults.Name = "gridResults";
-            this.gridResults.ReadOnly = true;
-            this.gridResults.RowHeadersVisible = false;
-            this.gridResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridResults.Size = new System.Drawing.Size(293, 285);
-            this.gridResults.TabIndex = 7;
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "runButton";
+            this.toolStripButton1.ToolTipText = "Run";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // MainForm
             // 
@@ -486,11 +532,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudBalance)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridResults)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridResults)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -516,10 +564,8 @@
         private System.Windows.Forms.Button btnOptAggressive;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbExpectedBalance;
         private System.Windows.Forms.TextBox tbProfitLoss;
-        private System.Windows.Forms.TextBox tbFinalBalance;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -528,8 +574,13 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.ToolStripProgressBar simulationProgressBar;
         private System.Windows.Forms.DataGridView gridResults;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Balance;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Wins;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Loses;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WinRate;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 
